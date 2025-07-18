@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>결혼식 축의금 관리 시스템</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>🎉 결혼식 축의금 관리 시스템</h1>
+    <button id="enterBtn">들어가기</button>
+    <small class="add-wedding"><a href="/add-wedding.html">결혼 추가</a></small>
+</div>
+
+<!-- 로그인 모달 -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>웨딩 접속</h2>
+        <input type="text" id="username" placeholder="아이디">
+        <input type="password" id="password" placeholder="비밀번호">
+        <button id="loginBtn">접속하기</button>
+        <p id="loginError" class="error"></p>
+    </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+/* === Reset === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Pretendard', sans-serif;
+    background: linear-gradient(to bottom right, #fffaf5, #fdfdfd);
+    color: #3c3c3c;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    text-align: center;
+    padding: 40px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #d4af37;
+    margin-bottom: 30px;
+}
+
+button {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #c8a02f;
+    transform: translateY(-2px);
+}
+
+.add-wedding {
+    display: block;
+    margin-top: 20px;
+    font-size: 11px;
+    color: #999999;
+}
+
+.add-wedding a {
+    text-decoration: none;
+    color: #999999;
+}
+
+.add-wedding a:hover {
+    color: #d4af37;
+}
+
+/* === Modal === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 12% auto;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.modal-content button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 22px;
+    color: #888;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 10px;
+}
