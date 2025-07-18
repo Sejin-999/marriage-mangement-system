@@ -1,27 +1,6 @@
 version: '3.8'
 
 services:
-  mariadb:
-    image: mariadb:11
-    container_name: wedding-db
-    restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: rootpass
-      MARIADB_DATABASE: ${DB_NAME}
-      MARIADB_USER: ${DB_USER}
-      MARIADB_PASSWORD: ${DB_PASSWORD}
-    ports:
-      - "3307:3306"
-    volumes:
-      - mariadb_data:/var/lib/mysql
-    networks:
-      - wedding-net
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-
   app:
     build:
       context: .
@@ -30,18 +9,15 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      mariadb:
+      wedding-db:
         condition: service_healthy
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/${DB_NAME}
+      SPRING_DATASOURCE_URL: jdbc:mariadb://wedding-db:3306/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
     networks:
       - wedding-net
 
-volumes:
-  mariadb_data:
-
 networks:
   wedding-net:
-    driver: bridge
+    external: true  # 기존에 만든 network 사용

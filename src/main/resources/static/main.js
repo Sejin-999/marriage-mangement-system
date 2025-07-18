@@ -15,9 +15,15 @@ document.getElementById("loginBtn").onclick = function () {
     })
         .then(response => {
             if (response.ok) {
-                window.location.href = `/dashboard.html?username=${username}`;
+                return response.json();  // ✅ weddingId가 숫자로 리턴됨
             } else {
-                document.getElementById("loginError").innerText = "아이디 또는 비밀번호 오류";
+                throw new Error("인증 실패");
             }
+        })
+        .then(weddingId => {
+            window.location.href = `/dashboard.html?weddingId=${weddingId}`; // 🔁 weddingId 전달
+        })
+        .catch(() => {
+            document.getElementById("loginError").innerText = "아이디 또는 비밀번호 오류";
         });
 };
