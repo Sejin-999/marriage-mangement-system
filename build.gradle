@@ -40,3 +40,9 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// 퍼미션 오류 방지 설정
+tasks.named('processResources') {
+    // Windows/WSL에서 퍼미션 적용 방지
+    fileMode = null
+}

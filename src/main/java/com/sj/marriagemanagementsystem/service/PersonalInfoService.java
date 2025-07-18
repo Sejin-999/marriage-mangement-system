@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -45,19 +44,18 @@ public class PersonalInfoService {
             throw new IllegalArgumentException("개인정보 인증 실패");
         }
 
-        List<CongratulatoryMoney> moneyList = moneyRepository.findAll()
-                .stream()
+        List<CongratulatoryMoney> moneyList = moneyRepository.findAll().stream()
                 .filter(m -> m.getWedding().getId().equals(wedding.getId()))
-                .toList();
+                .collect(Collectors.toList());
 
-        return moneyList.stream().map(m -> CongratulatoryMoneyDto.builder()
-                .id(m.getId())
-                .name(m.getName())
-                .amount(m.getAmount())
-                .time(m.getTime())
-                .mealTicketCount(m.getMealTicketCount())
-                .weddingId(m.getWedding().getId())
-                .build()
-        ).collect(toList());
+        return moneyList.stream()
+                .map(m -> CongratulatoryMoneyDto.builder()
+                        .name(m.getName())
+                        .amount(m.getAmount())
+                        .time(m.getTime())
+                        .mealTicketCount(m.getMealTicketCount())
+                        .weddingId(wedding.getId())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

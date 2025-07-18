@@ -16,6 +16,11 @@ services:
       - mariadb_data:/var/lib/mysql
     networks:
       - wedding-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-prootpass"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   app:
     build:
@@ -25,7 +30,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/${DB_NAME}
       SPRING_DATASOURCE_USERNAME: ${DB_USER}
